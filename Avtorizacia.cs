@@ -15,10 +15,12 @@ namespace Проект
     public partial class Avtorizacia : Form
     {
         private SQLiteConnection connection;
-        Form1 f2;
+        Menu_organ f2;
         public Avtorizacia()
         {
             InitializeComponent();
+            KeyPreview = true;
+            KeyDown += (s, e) => { if (e.KeyValue == (char)Keys.Enter) enter_Click(enter, null); }; //работа клавиши "Enter"
         }
 
         private void enter_Click(object sender, EventArgs e)
@@ -29,15 +31,24 @@ namespace Проект
             SQLiteDataAdapter adapter = new SQLiteDataAdapter();
             DataTable table = new DataTable();
             SQLiteCommand command = new SQLiteCommand("SELECT * FROM users WHERE `pin` = @ul AND `password`=@up", this.connection);
+            
             command.Parameters.AddWithValue("@ul", loginU);
             command.Parameters.AddWithValue("@up", passwordU);
             adapter.SelectCommand = command;
             adapter.Fill(table);
+            SQLiteDataReader reader = command.ExecuteReader(); 
+            while (reader.Read())
+            {
+                User_info.user_id = $"{reader.GetInt32(0)}";
+                User_info.user_ima = $"{reader["fio"]}"; //сохранение ФИО для будущих действий
+                User_info.user_role= $"{reader["ID_role"]}";
+            }
+            MessageBox.Show(User_info.user_ima + User_info.user_id + User_info.user_role);
             //bindingSource1.DataSource = data.Tables[0].DefaultView;
             if (table.Rows.Count > 0)
             {
                 MessageBox.Show("Tes");
-                f2 = new Form1();
+                f2 = new Menu_organ();
                 f2.Show(); 
             }
             else

@@ -137,7 +137,7 @@ namespace Проект
             this.Controls.Add(this.login_text);
             this.Controls.Add(this.enter);
             this.Name = "Avtorizacia";
-            this.Text = "Form1";
+            this.Text = "Авторизация";
             this.Load += new System.EventHandler(this.Avtorizacia_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
