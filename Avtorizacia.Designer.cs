@@ -43,6 +43,7 @@ namespace Проект
             // enter
             // 
             this.enter.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.enter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.enter.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.enter.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.enter.Location = new System.Drawing.Point(309, 321);

@@ -43,17 +43,16 @@ namespace Проект
                 User_info.user_ima = $"{reader["fio"]}"; //сохранение ФИО для будущих действий
                 User_info.user_role= $"{reader["ID_role"]}";
             }
-            MessageBox.Show(User_info.user_ima + User_info.user_id + User_info.user_role);
             //bindingSource1.DataSource = data.Tables[0].DefaultView;
             if (table.Rows.Count > 0)
             {
-                MessageBox.Show("Tes");
+                MessageBox.Show("Вы успешно зашли в свой аккаунт!");
                 f2 = new Menu_organ();
                 f2.Show(); 
             }
             else
             {
-                MessageBox.Show("No");
+                MessageBox.Show("Логин или пароль неверный!");
             }
                 
             this.connection.Close();

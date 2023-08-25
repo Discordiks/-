@@ -45,6 +45,7 @@ namespace Проект
             // exit
             // 
             this.exit.BackColor = System.Drawing.SystemColors.Highlight;
+            this.exit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.exit.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.exit.Location = new System.Drawing.Point(38, 24);
@@ -77,6 +78,7 @@ namespace Проект
             // chemp
             // 
             this.chemp.BackColor = System.Drawing.SystemColors.Highlight;
+            this.chemp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chemp.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.chemp.Location = new System.Drawing.Point(38, 138);
@@ -89,6 +91,7 @@ namespace Проект
             // sett_chemp
             // 
             this.sett_chemp.BackColor = System.Drawing.SystemColors.Highlight;
+            this.sett_chemp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sett_chemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.sett_chemp.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.sett_chemp.Location = new System.Drawing.Point(38, 199);
@@ -97,10 +100,12 @@ namespace Проект
             this.sett_chemp.TabIndex = 9;
             this.sett_chemp.Text = "Настройка чемпионата";
             this.sett_chemp.UseVisualStyleBackColor = false;
+            this.sett_chemp.Click += new System.EventHandler(this.sett_chemp_Click);
             // 
             // upr_expert
             // 
             this.upr_expert.BackColor = System.Drawing.SystemColors.Highlight;
+            this.upr_expert.Cursor = System.Windows.Forms.Cursors.Hand;
             this.upr_expert.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.upr_expert.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.upr_expert.Location = new System.Drawing.Point(38, 260);
@@ -113,6 +118,7 @@ namespace Проект
             // protocols
             // 
             this.protocols.BackColor = System.Drawing.SystemColors.Highlight;
+            this.protocols.Cursor = System.Windows.Forms.Cursors.Hand;
             this.protocols.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.protocols.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.protocols.Location = new System.Drawing.Point(38, 321);

@@ -15,6 +15,7 @@ namespace Проект
     public partial class Menu_organ : Form
     {
         private SQLiteConnection connection;
+        MO_settings_champ f2;
         public Menu_organ()
         {
             InitializeComponent();
@@ -44,6 +45,12 @@ namespace Проект
 
         private void Form1_Load(object sender, EventArgs e)
         {
+        }
+
+        private void sett_chemp_Click(object sender, EventArgs e)
+        {
+            f2 = new MO_settings_champ();
+            f2.Show();
         }
     }
 
