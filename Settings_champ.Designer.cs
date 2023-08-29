@@ -313,6 +313,7 @@ namespace Проект
             this.chemp_view.RowTemplate.Height = 24;
             this.chemp_view.Size = new System.Drawing.Size(868, 198);
             this.chemp_view.TabIndex = 41;
+            this.chemp_view.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.chemp_view_RowHeaderMouseClick);
             // 
             // MO_settings_champ
             // 

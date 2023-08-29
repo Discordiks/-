@@ -15,6 +15,7 @@ namespace Проект
     public partial class MO_settings_champ : Form
     {
         private SQLiteConnection connection;
+        int ID1 = 0;
         [Serializable]
         class Skill
         {
@@ -237,11 +238,93 @@ namespace Проект
         {
 
         }
-
+        private void ClearData1() //метод очищения полей 
+        {
+            ID1 = 0;
+            name_champ.Text = "";
+            date_1.Text = "";
+            date_2.Text = "";
+            info.Text = "";
+            city.Text = "";
+            skills.Text = "";
+            gl_expert.Text = "";
+        }
+        private void chemp_view_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) //метод заполнения полей значения из таблицы
+        {
+            ID1 = Convert.ToInt32(chemp_view.Rows[e.RowIndex].Cells[0].Value.ToString());
+            name_champ.Text = chemp_view.Rows[e.RowIndex].Cells[1].Value.ToString();
+            date_1.Text = chemp_view.Rows[e.RowIndex].Cells[2].Value.ToString();
+            date_2.Text = chemp_view.Rows[e.RowIndex].Cells[3].Value.ToString();
+            info.Text = chemp_view.Rows[e.RowIndex].Cells[4].Value.ToString();
+            city.Text = chemp_view.Rows[e.RowIndex].Cells[5].Value.ToString();
+            skills.Text = chemp_view.Rows[e.RowIndex].Cells[6].Value.ToString();
+            gl_expert.Text = chemp_view.Rows[e.RowIndex].Cells[7].Value.ToString();
+            User_info.championship_delete = gl_expert.Text;
+        }
         private void change_Click(object sender, EventArgs e)
         {
+            //изменение чемпионата, его скилла и его главного эксперта
+            if (name_champ.Text != "" && date_1.Text != "" && date_2.Text != "" && info.Text != "" && skills.Text != "" && gl_expert.Text != "")
+            {
+                this.connection.Open();
+                SQLiteCommand command_1 = new SQLiteCommand("UPDATE competitions SET title = @l1, date_start = @l2, date_end = @l3, description = @l4, city = @l5 WHERE id=@l0", connection);
+                SQLiteCommand command_2 = new SQLiteCommand("UPDATE competitions_skills SET skill_id = @l7 WHERE competition_id=@l0", connection);
+                SQLiteCommand command_3 = new SQLiteCommand("UPDATE users SET championship=@l8 WHERE fio = @l9", connection);
+                SQLiteCommand command_4 = new SQLiteCommand("UPDATE users SET championship=@l0 WHERE fio = @l10", connection);
+                
 
+                command_1.Parameters.AddWithValue("@l0", ID1); //изменение данных чемпионата в таблице competitions
+                command_1.Parameters.AddWithValue("@l1", name_champ.Text);
+                command_1.Parameters.AddWithValue("@l2", Convert.ToDateTime(date_1.Text));
+                command_1.Parameters.AddWithValue("@l3", Convert.ToDateTime(date_2.Text));
+                command_1.Parameters.AddWithValue("@l4", info.Text);
+                command_1.Parameters.AddWithValue("@l5", city.Text);
+                command_1.ExecuteNonQuery();
+
+                SQLiteDataAdapter adapter_ = new SQLiteDataAdapter(); //поиск и запись id только что изменённого скилла к чемпионату
+                DataTable table_ = new DataTable();
+                SQLiteCommand command_ = new SQLiteCommand("SELECT * FROM skills WHERE `title` = @l6", this.connection);
+                string l6 = skills.Text;
+                command_.Parameters.AddWithValue("@l6", l6);
+                adapter_.SelectCommand = command_;
+                adapter_.Fill(table_);
+                SQLiteDataReader reader_ = command_.ExecuteReader();
+                while (reader_.Read())
+                {
+                    User_info.skills_id_update = $"{reader_["id"]}";
+                    break;
+                }
+                reader_.Close();
+                string l7 = User_info.skills_id_update;
+                command_2.Parameters.AddWithValue("@l0", ID1); //изменение скилла чемпионата в таблице competitions_skills
+                command_2.Parameters.AddWithValue("@l7", l7);
+                command_2.ExecuteNonQuery();
+
+                string l8 = null;
+                string l9 = User_info.championship_delete;
+                command_3.Parameters.AddWithValue("@l8", l8); //удаление чемпионата у предыдущего главного эксперта
+                command_3.Parameters.AddWithValue("@l9", l9);
+                command_3.ExecuteNonQuery();
+
+                string l10= gl_expert.Text;
+                command_4.Parameters.AddWithValue("@l0", ID1); //изменение главного эксперта чемпионата в таблице users
+                command_4.Parameters.AddWithValue("@l10", l10);
+                command_4.ExecuteNonQuery();
+
+
+                MessageBox.Show("Запись успешно обновлена");
+                this.connection.Close();
+                Table_refresh();
+                ClearData1();
+
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите запись для обновления");
+            }
         }
+
+        
     }
 
 }
