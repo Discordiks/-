@@ -46,7 +46,7 @@ namespace Проект
             this.enter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.enter.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.enter.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.enter.Location = new System.Drawing.Point(309, 321);
+            this.enter.Location = new System.Drawing.Point(428, 404);
             this.enter.Name = "enter";
             this.enter.Size = new System.Drawing.Size(172, 47);
             this.enter.TabIndex = 0;
@@ -58,7 +58,7 @@ namespace Проект
             // 
             this.login_text.AutoSize = true;
             this.login_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.login_text.Location = new System.Drawing.Point(188, 153);
+            this.login_text.Location = new System.Drawing.Point(291, 218);
             this.login_text.Name = "login_text";
             this.login_text.Size = new System.Drawing.Size(83, 29);
             this.login_text.TabIndex = 1;
@@ -68,7 +68,7 @@ namespace Проект
             // 
             this.password_text.AutoSize = true;
             this.password_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.password_text.Location = new System.Drawing.Point(188, 215);
+            this.password_text.Location = new System.Drawing.Point(291, 280);
             this.password_text.Name = "password_text";
             this.password_text.Size = new System.Drawing.Size(99, 29);
             this.password_text.TabIndex = 2;
@@ -77,17 +77,17 @@ namespace Проект
             // Label
             // 
             this.Label.AutoSize = true;
-            this.Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Label.Location = new System.Drawing.Point(304, 57);
+            this.Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Label.Location = new System.Drawing.Point(378, 104);
             this.Label.Name = "Label";
-            this.Label.Size = new System.Drawing.Size(177, 29);
+            this.Label.Size = new System.Drawing.Size(272, 46);
             this.Label.TabIndex = 3;
             this.Label.Text = "Авторизация";
             // 
             // login
             // 
             this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.login.Location = new System.Drawing.Point(309, 137);
+            this.login.Location = new System.Drawing.Point(428, 202);
             this.login.Multiline = true;
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(261, 45);
@@ -96,7 +96,7 @@ namespace Проект
             // password
             // 
             this.password.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.password.Location = new System.Drawing.Point(309, 201);
+            this.password.Location = new System.Drawing.Point(428, 266);
             this.password.Multiline = true;
             this.password.Name = "password";
             this.password.PasswordChar = '*';
@@ -107,7 +107,7 @@ namespace Проект
             // 
             this.checkBox.AutoSize = true;
             this.checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox.Location = new System.Drawing.Point(286, 270);
+            this.checkBox.Location = new System.Drawing.Point(399, 350);
             this.checkBox.Name = "checkBox";
             this.checkBox.Size = new System.Drawing.Size(232, 33);
             this.checkBox.TabIndex = 7;
@@ -117,18 +117,18 @@ namespace Проект
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(524, 270);
+            this.dataGridView1.Location = new System.Drawing.Point(637, 350);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(254, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(343, 150);
             this.dataGridView1.TabIndex = 8;
             // 
             // Avtorizacia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1024, 567);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.checkBox);
             this.Controls.Add(this.password);
@@ -138,6 +138,7 @@ namespace Проект
             this.Controls.Add(this.login_text);
             this.Controls.Add(this.enter);
             this.Name = "Avtorizacia";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Авторизация";
             this.Load += new System.EventHandler(this.Avtorizacia_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

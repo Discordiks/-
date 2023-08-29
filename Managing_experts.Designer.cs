@@ -151,7 +151,7 @@ namespace Проект
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1024, 567);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.protocols);
             this.Controls.Add(this.upr_expert);
@@ -162,6 +162,7 @@ namespace Проект
             this.Controls.Add(this.exit);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Managing_experts";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Managing_experts";
             this.Load += new System.EventHandler(this.Managing_experts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
