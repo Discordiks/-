@@ -15,7 +15,7 @@ namespace Проект
     public partial class Avtorizacia : Form
     {
         private SQLiteConnection connection;
-        Menu_organ f2;
+        MO_settings_champ f2;
         public Avtorizacia()
         {
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace Проект
             if (table.Rows.Count > 0)
             {
                 MessageBox.Show("Вы успешно зашли в свой аккаунт!");
-                f2 = new Menu_organ();
+                f2 = new MO_settings_champ();
                 f2.Show(); 
             }
             else

@@ -90,6 +90,7 @@ namespace Проект
             this.sett_chemp.TabIndex = 18;
             this.sett_chemp.Text = "Настройка чемпионата";
             this.sett_chemp.UseVisualStyleBackColor = false;
+            this.sett_chemp.Click += new System.EventHandler(this.sett_chemp_Click);
             // 
             // chemp
             // 
@@ -151,7 +152,7 @@ namespace Проект
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 567);
+            this.ClientSize = new System.Drawing.Size(1413, 553);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.protocols);
             this.Controls.Add(this.upr_expert);

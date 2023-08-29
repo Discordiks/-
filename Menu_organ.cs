@@ -45,17 +45,16 @@ namespace Проект
         private void Table_refresh()
         {
             this.connection.Open();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT * FROM competitions", this.connection);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT * FROM users", this.connection);
             DataSet data = new DataSet();
             adapter.Fill(data);
-            dataGridView1.DataSource = data.Tables[0].DefaultView;
-            //bindingSource1.DataSource = data.Tables[0].DefaultView;
+            users_view.DataSource = data.Tables[0].DefaultView;
+            bindingSource1.DataSource = data.Tables[0].DefaultView;
             this.connection.Close();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             connection = new SQLiteConnection("Data Source=b.db");
-            dataGridView1.Visible = false;
             this.Table_refresh();
         }
 
@@ -65,7 +64,6 @@ namespace Проект
             f2.Show();
         }
 
-        
     }
 
 }

@@ -21,5 +21,10 @@ namespace Проект
         {
 
         }
+
+        private void sett_chemp_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -34,6 +34,43 @@ namespace Проект
         public MO_settings_champ()
         {
             InitializeComponent();
+            chemp.BackColor = Color.LimeGreen;
+            sett_chemp.BackColor = Color.DodgerBlue;
+            upr_expert.BackColor = Color.DodgerBlue;
+            protocols.BackColor = Color.DodgerBlue;
+
+            compet_view.Visible = true;
+
+            expert_view.Visible = false;
+            label10.Visible = false;
+            ex_fio.Visible = false;
+            ex_skill.Visible = false;
+            ex_status.Visible = false;
+            box_fio.Visible = false;
+            box_skill.Visible = false;
+            box_status.Visible = false;
+
+            chemp_view.Visible = false;
+            label2.Visible = false;
+            label3.Visible = false;
+            label4.Visible = false;
+            label5.Visible = false;
+            label6.Visible = false;
+            label7.Visible = false;
+            label8.Visible = false;
+            label9.Visible = false;
+            name_champ_combo.Visible = false;
+            name_champ.Visible = false;
+            info.Visible = false;
+            city.Visible = false;
+            skills.Visible = false;
+            gl_expert.Visible = false;
+            date_1.Visible = false;
+            date_2.Visible = false;
+            add.Visible = false;
+            change.Visible = false;
+
+            chemp_view.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(chemp_view_RowHeaderMouseClick);
             if (DateTime.Now.TimeOfDay >= new TimeSpan(0, 0, 0) && DateTime.Now.TimeOfDay < new TimeSpan(6, 0, 0))
             {
                 hello.Text = "Доброй ночи, " + User_info.user_ima;
@@ -44,46 +81,51 @@ namespace Проект
             }
             else if (DateTime.Now.TimeOfDay >= new TimeSpan(12, 0, 0) && DateTime.Now.TimeOfDay < new TimeSpan(18, 0, 0))
             {
-                hello.Text = "Добрый день, ";
+                hello.Text = "Добрый день, " + User_info.user_ima;
             }
             else if (DateTime.Now.TimeOfDay >= new TimeSpan(18, 0, 0) && DateTime.Now.TimeOfDay < new TimeSpan(24, 0, 0))
             {
-                hello.Text = "Добрый вечер, ";
+                hello.Text = "Добрый вечер, " + User_info.user_ima;
             }
             else
             {
-                hello.Text = "Доброй ночи, ";
+                hello.Text = "Доброй ночи, " + User_info.user_ima;
             }
         }
         private void Table_refresh()
         {
             this.connection.Open();
-            SQLiteDataAdapter adapter_1 = new SQLiteDataAdapter("SELECT * FROM users", this.connection);
+            SQLiteDataAdapter adapter_1 = new SQLiteDataAdapter("SELECT * FROM competitions", this.connection);
             DataSet data_1 = new DataSet();
             adapter_1.Fill(data_1);
-            SQLiteDataAdapter adapter_2 = new SQLiteDataAdapter("SELECT * FROM competitions", this.connection);
+            compet_view.DataSource = data_1.Tables[0].DefaultView; //вывод участников в таблицу
+            //bindingSource1.DataSource = data_1.Tables[0].DefaultView;
+
+            SQLiteDataAdapter adapter_2 = new SQLiteDataAdapter("SELECT  DISTINCT users.id, users.fio, skills.title AS skills_title, statuses.name AS status_title, users.telephone, users.email FROM users JOIN roles ON roles.id = users.ID_role JOIN statuses ON statuses.id = users.status JOIN skills ON users.skill = skills.id WHERE users.ID_role = 2 OR users.ID_role = 3 OR users.ID_role = 4 OR users.ID_role = 5", this.connection);
             DataSet data_2 = new DataSet();
             adapter_2.Fill(data_2);
-            SQLiteDataAdapter adapter_3 = new SQLiteDataAdapter("SELECT * FROM skills_blocks", this.connection);
-            DataSet data_3 = new DataSet();
-            adapter_3.Fill(data_3);
-            SQLiteDataAdapter adapter_4 = new SQLiteDataAdapter("SELECT * FROM skills", this.connection);
-            DataSet data_4 = new DataSet();
-            adapter_4.Fill(data_4);
-            SQLiteDataAdapter adapter_5 = new SQLiteDataAdapter("SELECT * FROM competitions_skills", this.connection);
-            DataSet data_5 = new DataSet();
-            adapter_5.Fill(data_5);
+            expert_view.DataSource = data_2.Tables[0].DefaultView; //вывод экспертов в таблицу
+            bindingSource1.DataSource = data_2.Tables[0].DefaultView;
+
             SQLiteDataAdapter adapter_6 = new SQLiteDataAdapter("SELECT DISTINCT competitions.id AS `Код`, competitions.title AS `Название чемпионата`, competitions.date_start AS `Начало чемпионата`, competitions.date_end AS `Конец чемпионата`, competitions.description AS `Ифн-я по чемпионату`, competitions.city AS `Место проведения чемпионата`, skills.title AS `Название скилла`, users.fio AS `ФИО гл. эксперта` FROM users JOIN roles ON roles.id = users.ID_role JOIN competitions ON users.championship = competitions.id JOIN skills ON skills.id = users.skill JOIN competitions_skills ON competitions_skills.competition_id = competitions.id WHERE users.ID_role = 3", this.connection);
             DataSet data_6 = new DataSet(); //надо именно экспертов, так что потом следует поставить "где роль = 3"
             adapter_6.Fill(data_6);
             chemp_view.DataSource = data_6.Tables[0].DefaultView; //вывод чемпионатов в таблицу
-            //bindingSource1.DataSource = data.Tables[0].DefaultView;
             this.connection.Close();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             connection = new SQLiteConnection("Data Source=b.db");
             this.connection.Open();
+
+            SQLiteCommand cmd_0 = new SQLiteCommand("SELECT * FROM competitions", this.connection);
+            SQLiteDataReader DR = cmd_0.ExecuteReader();
+
+            while (DR.Read())
+            {
+                name_champ_combo.Items.Add(DR[1]);
+            }
+
             SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM skills", this.connection);
             SQLiteDataReader rd = cmd.ExecuteReader();
             while (rd.Read())
@@ -129,9 +171,8 @@ namespace Проект
                 this.gl_expert.Items.Add(name);
             }
         }
-        private void add_Click(object sender, EventArgs e)
+        private void add_Click(object sender, EventArgs e) //добавление чемпионата, его скилла и его главного эксперта
         {
-            //добавление чемпионата, его скилла и его главного эксперта
             this.connection.Open(); //добавление чемпионата
             string label_1 = name_champ.Text;
             DateTime label_2 = Convert.ToDateTime(date_1.Text);
@@ -233,11 +274,6 @@ namespace Проект
             }
             Table_refresh();
         }
-
-        private void chemp_Click(object sender, EventArgs e)
-        {
-
-        }
         private void ClearData1() //метод очищения полей 
         {
             ID1 = 0;
@@ -261,9 +297,8 @@ namespace Проект
             gl_expert.Text = chemp_view.Rows[e.RowIndex].Cells[7].Value.ToString();
             User_info.championship_delete = gl_expert.Text;
         }
-        private void change_Click(object sender, EventArgs e)
+        private void change_Click(object sender, EventArgs e) //изменение чемпионата, его скилла и его главного эксперта
         {
-            //изменение чемпионата, его скилла и его главного эксперта
             if (name_champ.Text != "" && date_1.Text != "" && date_2.Text != "" && info.Text != "" && skills.Text != "" && gl_expert.Text != "")
             {
                 this.connection.Open();
@@ -324,7 +359,208 @@ namespace Проект
             }
         }
 
-        
+
+
+
+        private void chemp_Click(object sender, EventArgs e)
+        {
+            if (chemp.BackColor == Color.LimeGreen)
+            {
+                MessageBox.Show("Вы уже на этой вкладке");
+            }
+            else
+            {
+                chemp.BackColor = Color.LimeGreen;
+                sett_chemp.BackColor = Color.DodgerBlue;
+                upr_expert.BackColor = Color.DodgerBlue;
+                protocols.BackColor = Color.DodgerBlue;
+
+                compet_view.Visible = true;
+
+                expert_view.Visible = false;
+                label10.Visible = false;
+                ex_fio.Visible = false;
+                ex_skill.Visible = false;
+                ex_status.Visible = false;
+                box_fio.Visible = false;
+                box_skill.Visible = false;
+                box_status.Visible = false;
+
+                chemp_view.Visible = false;
+                label2.Visible = false;
+                label3.Visible = false;
+                label4.Visible = false;
+                label5.Visible = false;
+                label6.Visible = false;
+                label7.Visible = false;
+                label8.Visible = false;
+                label9.Visible = false;
+                name_champ_combo.Visible = false;
+                name_champ.Visible = false;
+                info.Visible = false;
+                city.Visible = false;
+                skills.Visible = false;
+                gl_expert.Visible = false;
+                date_1.Visible = false;
+                date_2.Visible = false;
+                add.Visible = false;
+                change.Visible = false;
+            }
+        }
+        private void sett_chemp_Click(object sender, EventArgs e)
+        {
+            
+            if (sett_chemp.BackColor == Color.LimeGreen)
+            {
+                MessageBox.Show("Вы уже на этой вкладке");
+            }
+            else
+            {
+                chemp.BackColor = Color.DodgerBlue;
+                sett_chemp.BackColor = Color.LimeGreen;
+                upr_expert.BackColor = Color.DodgerBlue;
+                protocols.BackColor = Color.DodgerBlue;
+
+                compet_view.Visible = false;
+
+                expert_view.Visible = false;
+                label10.Visible = false;
+                ex_fio.Visible = false;
+                ex_skill.Visible = false;
+                ex_status.Visible = false;
+                box_fio.Visible = false;
+                box_skill.Visible = false;
+                box_status.Visible = false;
+
+                chemp_view.Visible = true;
+                label1.Visible = true;
+                label2.Visible = true;
+                label3.Visible = true;
+                label4.Visible = true;
+                label5.Visible = true;
+                label6.Visible = true;
+                label7.Visible = true;
+                label8.Visible = true;
+                label9.Visible = true;
+                name_champ_combo.Visible = true;
+                name_champ.Visible = true;
+                info.Visible = true;
+                city.Visible = true;
+                skills.Visible = true;
+                gl_expert.Visible = true;
+                date_1.Visible = true;
+                date_2.Visible = true;
+                add.Visible = true;
+                change.Visible = true;
+            }
+        }
+
+        private void upr_expert_Click(object sender, EventArgs e)
+        {
+            if (upr_expert.BackColor == Color.LimeGreen)
+            {
+                MessageBox.Show("Вы уже на этой вкладке");
+            }
+            else
+            {
+                chemp.BackColor = Color.DodgerBlue;
+                sett_chemp.BackColor = Color.DodgerBlue;
+                upr_expert.BackColor = Color.LimeGreen;
+                protocols.BackColor = Color.DodgerBlue;
+
+                compet_view.Visible = false;
+
+                expert_view.Visible = true;
+                label10.Visible = true;
+                ex_fio.Visible = true;
+                ex_skill.Visible = true;
+                ex_status.Visible = true;
+                box_fio.Visible = true;
+                box_skill.Visible = true;
+                box_status.Visible = true;
+
+                chemp_view.Visible = false;
+                label2.Visible = false;
+                label3.Visible = false;
+                label4.Visible = false;
+                label5.Visible = false;
+                label6.Visible = false;
+                label7.Visible = false;
+                label8.Visible = false;
+                label9.Visible = false;
+                name_champ_combo.Visible = false;
+                name_champ.Visible = false;
+                info.Visible = false;
+                city.Visible = false;
+                skills.Visible = false;
+                gl_expert.Visible = false;
+                date_1.Visible = false;
+                date_2.Visible = false;
+                add.Visible = false;
+                change.Visible = false;
+            }
+        }
+
+        private void protocols_Click(object sender, EventArgs e)
+        {
+            if (protocols.BackColor == Color.LimeGreen)
+            {
+                MessageBox.Show("Вы уже на этой вкладке");
+            }
+            else
+            {
+                chemp.BackColor = Color.DodgerBlue;
+                sett_chemp.BackColor = Color.DodgerBlue;
+                upr_expert.BackColor = Color.DodgerBlue;
+                protocols.BackColor = Color.LimeGreen;
+
+                compet_view.Visible = false;
+
+                expert_view.Visible = false;
+                label10.Visible = false;
+                ex_fio.Visible = false;
+                ex_skill.Visible = false;
+                ex_status.Visible = false;
+                box_fio.Visible = false;
+                box_skill.Visible = false;
+                box_status.Visible = false;
+
+                chemp_view.Visible = false;
+                label2.Visible = false;
+                label3.Visible = false;
+                label4.Visible = false;
+                label5.Visible = false;
+                label6.Visible = false;
+                label7.Visible = false;
+                label8.Visible = false;
+                label9.Visible = false;
+                name_champ_combo.Visible = false;
+                name_champ.Visible = false;
+                info.Visible = false;
+                city.Visible = false;
+                skills.Visible = false;
+                gl_expert.Visible = false;
+                date_1.Visible = false;
+                date_2.Visible = false;
+                add.Visible = false;
+                change.Visible = false;
+            }
+        }
+
+        private void box_status_TextChanged(object sender, EventArgs e)
+        {
+            bindingSource1.Filter = "status_title LIKE \'%" + box_status.Text + "%\'";
+        }
+
+        private void box_fio_TextChanged(object sender, EventArgs e)
+        {
+            bindingSource1.Filter = "fio LIKE \'%" + box_fio.Text + "%\'";
+        }
+
+        private void box_skill_TextChanged(object sender, EventArgs e)
+        {
+            bindingSource1.Filter = "skills_title LIKE \'%" + box_skill.Text + "%\'";
+        }
     }
 
 }
