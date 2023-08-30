@@ -15,7 +15,6 @@ namespace Проект
     public partial class Setting_champ : Form
     {
         private SQLiteConnection connection;
-        Menu_organ f2;
         public Setting_champ()
         {
             InitializeComponent();
