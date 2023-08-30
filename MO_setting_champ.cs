@@ -75,25 +75,6 @@ namespace Проект
             adapter_2.Fill(data_2);
             expert_view.DataSource = data_2.Tables[0].DefaultView;
             bindingSource2.DataSource = data_2.Tables[0].DefaultView;
-
-
-            //foreach (DataGridViewRow row in users_view.Rows) //окрашивание строк
-            //{
-            //    try
-            //    {
-            //        MessageBox.Show(Convert.ToString(row.Cells[3]));
-            //        if (Convert.ToString(row.Cells[3].Value.ToString()) == "Согласован")
-            //        {
-            //            row.DefaultCellStyle.BackColor = Color.Red;
-            //        }
-            //        else
-            //            row.DefaultCellStyle.BackColor = Color.White;
-            //    }
-            //    catch
-            //    {
-            //        // здесь можно отреагировать на неправильные данные, а можно ничего не делать
-            //    }
-            //}
             this.connection.Close();
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -125,7 +106,6 @@ namespace Проект
                 ex_skill.Visible = false;
                 box_ex_fio.Visible = false;
                 box_ex_skill.Visible = false;
-                //сумки ,ботинки андрею до кшолы на лцицу
             }
         }
         private void sett_champ_Click(object sender, EventArgs e)
