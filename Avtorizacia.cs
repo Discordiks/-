@@ -15,7 +15,7 @@ namespace Проект
     public partial class Avtorizacia : Form
     {
         private SQLiteConnection connection;
-        MO_settings_champ f2;
+        Menu_organ f2;
         public Avtorizacia()
         {
             InitializeComponent();
@@ -47,8 +47,9 @@ namespace Проект
             if (table.Rows.Count > 0)
             {
                 MessageBox.Show("Вы успешно зашли в свой аккаунт!");
-                f2 = new MO_settings_champ();
-                f2.Show(); 
+                f2 = new Menu_organ();
+                f2.Show();
+                this.Hide();
             }
             else
             {
@@ -61,7 +62,7 @@ namespace Проект
         private void Table_refresh()
         {
             this.connection.Open();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT * FROM users", this.connection);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT password, pin FROM users", this.connection);
             DataSet data = new DataSet();
             adapter.Fill(data);
             dataGridView1.DataSource = data.Tables[0].DefaultView;

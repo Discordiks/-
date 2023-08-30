@@ -220,17 +220,17 @@
     <Compile Include="Managing_experts.Designer.cs">
       <DependentUpon>Managing_experts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings_champ.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Settings_champ.Designer.cs">
-      <DependentUpon>Settings_champ.cs</DependentUpon>
-    </Compile>
     <Compile Include="Menu_organ.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Menu_organ.Designer.cs">
       <DependentUpon>Menu_organ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MO_setting_champ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MO_setting_champ.Designer.cs">
+      <DependentUpon>MO_setting_champ.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -241,11 +241,11 @@
     <EmbeddedResource Include="Managing_experts.resx">
       <DependentUpon>Managing_experts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings_champ.resx">
-      <DependentUpon>Settings_champ.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Menu_organ.resx">
       <DependentUpon>Menu_organ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MO_setting_champ.resx">
+      <DependentUpon>MO_setting_champ.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
