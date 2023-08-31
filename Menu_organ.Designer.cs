@@ -167,6 +167,7 @@ namespace Проект
             // 
             this.add.BackColor = System.Drawing.Color.DodgerBlue;
             this.add.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.add.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.add.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.add.Location = new System.Drawing.Point(943, 400);
             this.add.Name = "add";
@@ -180,6 +181,7 @@ namespace Проект
             // 
             this.change.BackColor = System.Drawing.Color.DodgerBlue;
             this.change.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.change.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.change.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.change.Location = new System.Drawing.Point(1169, 400);
             this.change.Name = "change";
