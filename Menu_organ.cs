@@ -16,6 +16,7 @@ namespace Проект
     {
         private SQLiteConnection connection;
         int ID1 = 0;
+        Avtorizacia f1;
         [Serializable]
         class Skill
         {
@@ -71,6 +72,8 @@ namespace Проект
             add.Visible = false;
             change.Visible = false;
 
+            prot_view.Visible = false;
+
             chemp_view.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(chemp_view_RowHeaderMouseClick);
             if (DateTime.Now.TimeOfDay >= new TimeSpan(0, 0, 0) && DateTime.Now.TimeOfDay < new TimeSpan(6, 0, 0))
             {
@@ -100,7 +103,6 @@ namespace Проект
             DataSet data_1 = new DataSet();
             adapter_1.Fill(data_1);
             compet_view.DataSource = data_1.Tables[0].DefaultView; //вывод участников в таблицу
-            //bindingSource1.DataSource = data_1.Tables[0].DefaultView;
 
             SQLiteDataAdapter adapter_2 = new SQLiteDataAdapter("SELECT  DISTINCT users.id, users.fio, skills.title AS skills_title, statuses.name AS status_title, users.telephone, users.email FROM users JOIN roles ON roles.id = users.ID_role JOIN statuses ON statuses.id = users.status JOIN skills ON users.skill = skills.id WHERE users.ID_role = 2 OR users.ID_role = 3 OR users.ID_role = 4 OR users.ID_role = 5", this.connection);
             DataSet data_2 = new DataSet();
@@ -108,10 +110,16 @@ namespace Проект
             expert_view.DataSource = data_2.Tables[0].DefaultView; //вывод экспертов в таблицу
             bindingSource1.DataSource = data_2.Tables[0].DefaultView;
 
-            SQLiteDataAdapter adapter_6 = new SQLiteDataAdapter("SELECT DISTINCT competitions.id AS `Код`, competitions.title AS `Название чемпионата`, competitions.date_start AS `Начало чемпионата`, competitions.date_end AS `Конец чемпионата`, competitions.description AS `Ифн-я по чемпионату`, competitions.city AS `Место проведения чемпионата`, skills.title AS `Название скилла`, users.fio AS `ФИО гл. эксперта` FROM users JOIN roles ON roles.id = users.ID_role JOIN competitions ON users.championship = competitions.id JOIN skills ON skills.id = users.skill JOIN competitions_skills ON competitions_skills.competition_id = competitions.id WHERE users.ID_role = 3", this.connection);
-            DataSet data_6 = new DataSet(); //надо именно экспертов, так что потом следует поставить "где роль = 3"
-            adapter_6.Fill(data_6);
-            chemp_view.DataSource = data_6.Tables[0].DefaultView; //вывод чемпионатов в таблицу
+            SQLiteDataAdapter adapter_3 = new SQLiteDataAdapter("SELECT DISTINCT competitions.id AS `Код`, competitions.title AS `Название чемпионата`, competitions.date_start AS `Начало чемпионата`, competitions.date_end AS `Конец чемпионата`, competitions.description AS `Ифн-я по чемпионату`, competitions.city AS `Место проведения чемпионата`, skills.title AS `Название скилла`, users.fio AS `ФИО гл. эксперта` FROM users JOIN roles ON roles.id = users.ID_role JOIN competitions ON users.championship = competitions.id JOIN skills ON skills.id = users.skill JOIN competitions_skills ON competitions_skills.competition_id = competitions.id WHERE users.ID_role = 3", this.connection);
+            DataSet data_3 = new DataSet(); //надо именно экспертов, так что потом следует поставить "где роль = 3"
+            adapter_3.Fill(data_3);
+            chemp_view.DataSource = data_3.Tables[0].DefaultView; //вывод чемпионатов в таблицу
+
+            SQLiteDataAdapter adapter_4 = new SQLiteDataAdapter("SELECT * FROM protocols", this.connection);
+            DataSet data_4 = new DataSet(); //надо именно экспертов, так что потом следует поставить "где роль = 3"
+            adapter_4.Fill(data_4);
+            prot_view.DataSource = data_4.Tables[0].DefaultView; //вывод чемпионатов в таблицу
+
             this.connection.Close();
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -126,7 +134,7 @@ namespace Проект
             {
                 name_champ_combo.Items.Add(DR[1]);
             }
-            
+            DR.Close();
             SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM skills", this.connection);
             SQLiteDataReader rd = cmd.ExecuteReader();
             while (rd.Read())
@@ -183,18 +191,22 @@ namespace Проект
             string label_6 = city.Text;
             if (label_2 <= label_3)
             {
-                string sql_1 = "INSERT INTO competitions(title, date_start, date_end, description, city) VALUES (@label_1,@label_2, @label_3, @label_5, @label_6)";
+                string sql_1 = "INSERT INTO competitions(title, date_start, date_end, description, city, expert_1, expert_2) VALUES (@label_1,@label_2, @label_3, @label_5, @label_6, @label_77,@label_88)";
                 SQLiteCommand command_1 = new SQLiteCommand(sql_1, connection);
                 SQLiteParameter param_1 = new SQLiteParameter("@label_1", label_1);
                 SQLiteParameter param_2 = new SQLiteParameter("@label_2", label_2);
                 SQLiteParameter param_3 = new SQLiteParameter("@label_3", label_3);
                 SQLiteParameter param_5 = new SQLiteParameter("@label_5", label_5);
                 SQLiteParameter param_6 = new SQLiteParameter("@label_6", label_6);
+                SQLiteParameter param_77 = new SQLiteParameter("@label_77", 0);
+                SQLiteParameter param_88 = new SQLiteParameter("@label_88", 0);
                 command_1.Parameters.Add(param_1);
                 command_1.Parameters.Add(param_2);
                 command_1.Parameters.Add(param_3);
                 command_1.Parameters.Add(param_5);
                 command_1.Parameters.Add(param_6);
+                command_1.Parameters.Add(param_77);
+                command_1.Parameters.Add(param_88);
                 using (command_1) //проверка на добавление записи чемпионата (competitions) в бд
                 {
                     int count_add_1 = command_1.ExecuteNonQuery();
@@ -361,8 +373,6 @@ namespace Проект
         }
 
 
-
-
         private void chemp_Click(object sender, EventArgs e)
         {
             if (chemp.BackColor == Color.LimeGreen)
@@ -406,6 +416,8 @@ namespace Проект
                 date_2.Visible = false;
                 add.Visible = false;
                 change.Visible = false;
+
+                prot_view.Visible = false;
             }
         }
         private void sett_chemp_Click(object sender, EventArgs e)
@@ -453,6 +465,8 @@ namespace Проект
                 date_2.Visible = true;
                 add.Visible = true;
                 change.Visible = true;
+
+                prot_view.Visible = false;
             }
         }
 
@@ -499,6 +513,8 @@ namespace Проект
                 date_2.Visible = false;
                 add.Visible = false;
                 change.Visible = false;
+
+                prot_view.Visible = false;
             }
         }
 
@@ -545,6 +561,8 @@ namespace Проект
                 date_2.Visible = false;
                 add.Visible = false;
                 change.Visible = false;
+
+                prot_view.Visible = true;
             }
         }
 
@@ -587,6 +605,13 @@ namespace Проект
             //this.Hide();
 
 
+        }
+
+        private void exit_Click(object sender, EventArgs e)
+        {
+            f1 = new Avtorizacia();
+            f1.Show();
+            this.Hide();
         }
     }
 

@@ -11,6 +11,7 @@ namespace Проект
         public static string user_id { get; set; }
         public static string user_ima { get; set; }
         public static string user_role { get; set; }
+        public static string user_id_comp { get; set; }
         public static string title_champ { get; set; } //запоминание id добавленного чемпионата
         public static string title_id { get; set; } //запоминание id добавленного скилла к чемпионату
         public static string skills_id_update { get; set; } //запоминание id изменённого скилла к чемпионату
@@ -23,7 +24,13 @@ namespace Проект
         public static string id_credential { get; set; } //запоминание id добавленного полномочия
         public static string id_role_credential { get; set; } //запоминание id добавленной роли к полномочию
         public static string role_id_update_credential { get; set; } //запоминание id изменённой роли к полномочию
-
+        public static int r { get; set; } //регион
+        public static int s { get; set; } //компетенция
+        public static int c { get; set; } //чемпионат
+        public static int status { get; set; } //статус
+        public static int status_delete { get; set; } //статус
+        public static int status_protocol { get; set; } //статус протокола
+        public static int status_fio { get; set; } //статус протокола
 
     }
 }

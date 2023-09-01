@@ -75,6 +75,11 @@ namespace Проект
             this.radio_ex = new System.Windows.Forms.RadioButton();
             this.radio_uch = new System.Windows.Forms.RadioButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.poln_role = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.max = new System.Windows.Forms.TextBox();
+            this.min = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -84,11 +89,6 @@ namespace Проект
             this.cred_view = new System.Windows.Forms.DataGridView();
             this.change_poln = new System.Windows.Forms.Button();
             this.add_poln = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.min = new System.Windows.Forms.TextBox();
-            this.max = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.poln_role = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.users_view)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -133,6 +133,7 @@ namespace Проект
             this.users_view.RowTemplate.Height = 24;
             this.users_view.Size = new System.Drawing.Size(868, 198);
             this.users_view.TabIndex = 12;
+            this.users_view.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.users_view_RowHeaderMouseClick);
             // 
             // protocols
             // 
@@ -600,6 +601,46 @@ namespace Проект
             this.tabPage3.Text = "Список особых полномочий экспертов";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // poln_role
+            // 
+            this.poln_role.FormattingEnabled = true;
+            this.poln_role.Location = new System.Drawing.Point(616, 320);
+            this.poln_role.Name = "poln_role";
+            this.poln_role.Size = new System.Drawing.Size(218, 24);
+            this.poln_role.TabIndex = 66;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(558, 323);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(40, 17);
+            this.label11.TabIndex = 79;
+            this.label11.Text = "Роль";
+            // 
+            // max
+            // 
+            this.max.Location = new System.Drawing.Point(458, 320);
+            this.max.Name = "max";
+            this.max.Size = new System.Drawing.Size(58, 22);
+            this.max.TabIndex = 78;
+            // 
+            // min
+            // 
+            this.min.Location = new System.Drawing.Point(181, 320);
+            this.min.Name = "min";
+            this.min.Size = new System.Drawing.Size(61, 22);
+            this.min.TabIndex = 77;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(281, 323);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(171, 17);
+            this.label9.TabIndex = 76;
+            this.label9.Text = "Макс. кол-во участников";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -695,46 +736,6 @@ namespace Проект
             this.add_poln.Text = "Добавить";
             this.add_poln.UseVisualStyleBackColor = false;
             this.add_poln.Click += new System.EventHandler(this.add_poln_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(281, 323);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(171, 17);
-            this.label9.TabIndex = 76;
-            this.label9.Text = "Макс. кол-во участников";
-            // 
-            // min
-            // 
-            this.min.Location = new System.Drawing.Point(181, 320);
-            this.min.Name = "min";
-            this.min.Size = new System.Drawing.Size(61, 22);
-            this.min.TabIndex = 77;
-            // 
-            // max
-            // 
-            this.max.Location = new System.Drawing.Point(458, 320);
-            this.max.Name = "max";
-            this.max.Size = new System.Drawing.Size(58, 22);
-            this.max.TabIndex = 78;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(558, 323);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(40, 17);
-            this.label11.TabIndex = 79;
-            this.label11.Text = "Роль";
-            // 
-            // poln_role
-            // 
-            this.poln_role.FormattingEnabled = true;
-            this.poln_role.Location = new System.Drawing.Point(616, 320);
-            this.poln_role.Name = "poln_role";
-            this.poln_role.Size = new System.Drawing.Size(218, 24);
-            this.poln_role.TabIndex = 66;
             // 
             // Setting_champ
             // 

@@ -123,18 +123,14 @@ namespace Проект
                 }
             }
             reader.Close();
-
             SQLiteCommand cmd_0 = new SQLiteCommand("SELECT * FROM roles", this.connection);
             SQLiteDataReader DR = cmd_0.ExecuteReader();
-
             while (DR.Read())
             {
                 prot_role.Items.Add(DR[1]);
                 poln_role.Items.Add(DR[1]);
             }
-
-
-
+            DR.Close();
             this.connection.Close();
             radio_all.Checked = true;
 
@@ -676,7 +672,49 @@ namespace Проект
             Table_refresh();
         }
 
-       
+
+        private void users_view_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            
+            DialogResult result = MessageBox.Show(
+        "Согласовать запись?",
+        "Согласование",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Information,
+        MessageBoxDefaultButton.Button1);
+
+            if (result == DialogResult.Yes)
+            {
+                this.connection.Open();
+                int id = Convert.ToInt32(users_view.Rows[e.RowIndex].Cells[0].Value.ToString());
+                SQLiteCommand cmd_3 = new SQLiteCommand("SELECT status FROM users WHERE id = @l0", this.connection);
+                SQLiteParameter param_3 = new SQLiteParameter("@l0", id);
+                cmd_3.Parameters.Add(param_3);
+                SQLiteDataReader DR_3 = cmd_3.ExecuteReader();
+                while (DR_3.Read())
+                {
+                    User_info.status_delete = DR_3.GetInt32(0);
+                }
+                DR_3.Close();
+                if (User_info.status_delete == 4)
+                {
+                    SQLiteCommand _command = new SQLiteCommand("DELETE FROM users WHERE id = @l0", connection);
+                    _command.Parameters.AddWithValue("@l0", id);
+                    _command.ExecuteNonQuery();
+                }
+                else
+                {
+                    SQLiteCommand _command = new SQLiteCommand("UPDATE users SET status=@l1 WHERE id = @l0", connection);
+                    _command.Parameters.AddWithValue("@l0", id);
+                    _command.Parameters.AddWithValue("@l1", 1);
+                    _command.ExecuteNonQuery();
+                }
+                
+                this.connection.Close();
+                MessageBox.Show("Запись успешно согласована");
+                Table_refresh();
+            }
+        }
     }
 
 }

@@ -16,6 +16,8 @@ namespace Проект
     {
         private SQLiteConnection connection;
         Menu_organ f2;
+        Menu_player f3;
+        Menu_expert f4;
         public Avtorizacia()
         {
             InitializeComponent();
@@ -37,27 +39,54 @@ namespace Проект
             adapter.SelectCommand = command;
             adapter.Fill(table);
             SQLiteDataReader reader = command.ExecuteReader(); 
-            while (reader.Read())
+            while (reader.Read()) //сохранение данных для будущих действий
             {
                 User_info.user_id = $"{reader.GetInt32(0)}";
                 User_info.user_ima = $"{reader["fio"]}"; //сохранение ФИО для будущих действий
                 User_info.user_role= $"{reader["ID_role"]}";
+                User_info.user_id_comp = $"{reader["championship"]}";
             }
-            //bindingSource1.DataSource = data.Tables[0].DefaultView;
             if (table.Rows.Count > 0)
             {
-                MessageBox.Show("Вы успешно зашли в свой аккаунт!");
-                f2 = new Menu_organ();
-                f2.Show();
-                this.Hide();
+                if (User_info.user_role == "6")
+                {
+                    MessageBox.Show("Вы успешно зашли в свой аккаунт!");
+                    f2 = new Menu_organ();
+                    f2.Show();
+                    this.Hide();
+                }
+                if (User_info.user_id_comp != null && User_info.user_id_comp != "")
+                {
+                    
+                    if (User_info.user_role == "1")
+                    {
+                        MessageBox.Show("Вы успешно зашли в свой аккаунт!");
+                        f3 = new Menu_player();
+                        f3.Show();
+                        this.Hide();
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Вы успешно зашли в свой аккаунт!");
+                        f4 = new Menu_expert();
+                        f4.Show();
+                        this.Hide();
+                    }
+                }
+                else
+                {
+                    if(User_info.user_role != "6")
+                    {
+                        MessageBox.Show("Вас ещё не зарегистрировали ни на один чемпионат :(");
+                    }
+                    
+                }
             }
             else
             {
                 MessageBox.Show("Логин или пароль неверный!");
             }
-                
             this.connection.Close();
-
         }
         private void Table_refresh()
         {
@@ -66,10 +95,8 @@ namespace Проект
             DataSet data = new DataSet();
             adapter.Fill(data);
             dataGridView1.DataSource = data.Tables[0].DefaultView;
-            //bindingSource1.DataSource = data.Tables[0].DefaultView;
             this.connection.Close();
         }
-
         private void Avtorizacia_Load(object sender, EventArgs e)
         {
             connection = new SQLiteConnection("Data Source=b.db");

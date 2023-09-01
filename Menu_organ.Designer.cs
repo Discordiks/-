@@ -67,11 +67,13 @@ namespace Проект
             this.box_skill = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.prot_view = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chemp_view)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compet_view)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.expert_view)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prot_view)).BeginInit();
             this.SuspendLayout();
             // 
             // exit
@@ -86,6 +88,7 @@ namespace Проект
             this.exit.TabIndex = 1;
             this.exit.Text = "Выход";
             this.exit.UseVisualStyleBackColor = false;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // label1
             // 
@@ -434,6 +437,18 @@ namespace Проект
             this.label10.TabIndex = 51;
             this.label10.Text = "Фильтрация";
             // 
+            // prot_view
+            // 
+            this.prot_view.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.prot_view.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.prot_view.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.prot_view.Location = new System.Drawing.Point(343, 93);
+            this.prot_view.Name = "prot_view";
+            this.prot_view.RowHeadersWidth = 51;
+            this.prot_view.RowTemplate.Height = 24;
+            this.prot_view.Size = new System.Drawing.Size(868, 437);
+            this.prot_view.TabIndex = 52;
+            // 
             // Menu_organ
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -475,6 +490,7 @@ namespace Проект
             this.Controls.Add(this.exit);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.compet_view);
+            this.Controls.Add(this.prot_view);
             this.Name = "Menu_organ";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Меню организатора";
@@ -484,6 +500,7 @@ namespace Проект
             ((System.ComponentModel.ISupportInitialize)(this.compet_view)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.expert_view)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prot_view)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -528,5 +545,6 @@ namespace Проект
         private System.Windows.Forms.TextBox box_skill;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.DataGridView prot_view;
     }
 }
