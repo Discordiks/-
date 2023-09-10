@@ -89,6 +89,7 @@ namespace Проект
             this.cred_view = new System.Windows.Forms.DataGridView();
             this.change_poln = new System.Windows.Forms.Button();
             this.add_poln = new System.Windows.Forms.Button();
+            this.graf = new LiveCharts.WinForms.CartesianChart();
             ((System.ComponentModel.ISupportInitialize)(this.users_view)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -737,11 +738,20 @@ namespace Проект
             this.add_poln.UseVisualStyleBackColor = false;
             this.add_poln.Click += new System.EventHandler(this.add_poln_Click);
             // 
+            // graf
+            // 
+            this.graf.Location = new System.Drawing.Point(310, 95);
+            this.graf.Name = "graf";
+            this.graf.Size = new System.Drawing.Size(946, 446);
+            this.graf.TabIndex = 66;
+            this.graf.Text = "cartesianChart1";
+            // 
             // Setting_champ
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1413, 553);
+            this.Controls.Add(this.graf);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.box_ex_skill);
             this.Controls.Add(this.box_ex_fio);
@@ -848,5 +858,6 @@ namespace Проект
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox poln_role;
         private System.Windows.Forms.Label label11;
+        private LiveCharts.WinForms.CartesianChart graf;
     }
 }
