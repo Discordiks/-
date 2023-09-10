@@ -65,9 +65,11 @@ namespace Проект
             this.ex_delete = new System.Windows.Forms.Button();
             this.ex_change = new System.Windows.Forms.Button();
             this.ex_add = new System.Windows.Forms.Button();
+            this.protocol_view = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.player_view)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ex_view)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.protocol_view)).BeginInit();
             this.SuspendLayout();
             // 
             // hello
@@ -439,11 +441,25 @@ namespace Проект
             this.ex_add.UseVisualStyleBackColor = false;
             this.ex_add.Click += new System.EventHandler(this.ex_add_Click);
             // 
+            // protocol_view
+            // 
+            this.protocol_view.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.protocol_view.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.protocol_view.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.protocol_view.Location = new System.Drawing.Point(342, 93);
+            this.protocol_view.Name = "protocol_view";
+            this.protocol_view.RowHeadersWidth = 51;
+            this.protocol_view.RowTemplate.Height = 24;
+            this.protocol_view.Size = new System.Drawing.Size(869, 412);
+            this.protocol_view.TabIndex = 99;
+            this.protocol_view.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.protocol_view_RowHeaderMouseClick);
+            // 
             // Menu_expert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1413, 553);
+            this.Controls.Add(this.protocol_view);
             this.Controls.Add(this.ex_delete);
             this.Controls.Add(this.ex_change);
             this.Controls.Add(this.ex_add);
@@ -481,11 +497,12 @@ namespace Проект
             this.Controls.Add(this.exit);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Menu_expert";
-            this.Text = "Menu_expert";
+            this.Text = "Окно эксперта";
             this.Load += new System.EventHandler(this.Menu_expert_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.player_view)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ex_view)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.protocol_view)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -529,5 +546,6 @@ namespace Проект
         private System.Windows.Forms.Button ex_delete;
         private System.Windows.Forms.Button ex_change;
         private System.Windows.Forms.Button ex_add;
+        private System.Windows.Forms.DataGridView protocol_view;
     }
 }

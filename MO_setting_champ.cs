@@ -134,6 +134,36 @@ namespace Проект
             this.connection.Close();
             radio_all.Checked = true;
 
+            //this.connection.Open();
+            //SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT  Имя, Фамилия, Отчество, Телефон, Адрес, сделки.Дата, сделки.[Кол-во товара], (сделки.[Кол-во товара] * товары.[Оптовая цена]) AS [Цена без скидки], (товары.[Оптовая цена] * сделки.[Кол-во товара] - (сделки.[Кол-во товара] * товары.[Оптовая цена] * сделки.Скидки / 100 )) AS [Цена со скидкой] FROM покупатели INNER JOIN товары ON сделки.[Код товара] = товары.Код INNER JOIN сделки ON сделки.[Код покупателя] = покупатели.Код ORDER BY [Дата]", this.connection);
+            //DataSet dataSet = new DataSet();
+            //dataAdapter.Fill(dataSet);
+
+            //cartesianChart2.LegendLocation = LegendLocation.Bottom;
+
+
+            //SeriesCollection series = new SeriesCollection();
+            //ChartValues<int> prices = new ChartValues<int>();
+            //List<string> dates = new List<string>();
+            //foreach (DataRow row in dataSet.Tables[0].Rows)
+            //{
+            //    prices.Add(Convert.ToInt32(row["Кол-во товара"]));
+
+            //    dates.Add(Convert.ToDateTime(row["Дата"]).ToShortDateString());
+            //}
+
+            //cartesianChart2.AxisX.Clear();
+            //cartesianChart2.AxisX.Add(new Axis()
+            //{
+            //    Title = "Даты",
+            //    Labels = dates
+            //});
+            //LineSeries line = new LineSeries();
+            //line.Title = "Кол-во проданных товаров в соответствующий день";
+            //line.Values = prices;
+            //series.Add(line);
+            //cartesianChart2.Series = series;
+
         }
 
         private void player_Click(object sender, EventArgs e)

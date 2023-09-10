@@ -49,6 +49,7 @@ namespace Проект
             ex_add.Visible = false;
             ex_change.Visible = false;
             ex_delete.Visible = false;
+            protocol_view.Visible = false;
 
 
         }
@@ -63,6 +64,10 @@ namespace Проект
             DataSet data_2 = new DataSet();
             adapter_2.Fill(data_2);
             ex_view.DataSource = data_2.Tables[0].DefaultView; //вывод экспертов в таблицу
+            SQLiteDataAdapter adapter_3 = new SQLiteDataAdapter("SELECT DISTINCT users_signs.id, users.fio, protocols.title, signs.sign FROM users JOIN users_signs ON users_signs.user_id = users.id JOIN signs ON signs.id = users_signs.sign_id JOIN protocols ON protocols.id = users_signs.protocol_id WHERE users.id = " + User_info.user_id, this.connection);
+            DataSet data_3 = new DataSet();
+            adapter_3.Fill(data_3);
+            protocol_view.DataSource = data_3.Tables[0].DefaultView; //вывод протоколов в таблицу
             this.connection.Close();
         }
         private void Menu_expert_Load(object sender, EventArgs e)
@@ -150,7 +155,7 @@ namespace Проект
                 player_tel.Visible = true;
                 player_pin.Visible = true;
                 player_pas.Visible = true;
-
+                protocol_view.Visible = false;
                 ex_add.Visible = false;
                 ex_change.Visible = false;
                 ex_delete.Visible = false;
@@ -190,7 +195,7 @@ namespace Проект
                 player_tel.Visible = true;
                 player_pin.Visible = true;
                 player_pas.Visible = true;
-
+                protocol_view.Visible = false;
                 ex_add.Visible = true;
                 ex_change.Visible = true;
                 ex_delete.Visible = true;
@@ -231,7 +236,7 @@ namespace Проект
                 player_tel.Visible = false;
                 player_pin.Visible = false;
                 player_pas.Visible = false;
-
+                protocol_view.Visible = true;
                 ex_add.Visible = false;
                 ex_change.Visible = false;
                 ex_delete.Visible = false;
@@ -657,6 +662,55 @@ namespace Проект
             Table_refresh();
         }
 
-        
+        private void protocol_view_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string f = protocol_view.Rows[e.RowIndex].Cells[1].Value.ToString();
+            string pr = protocol_view.Rows[e.RowIndex].Cells[2].Value.ToString();
+            string st = protocol_view.Rows[e.RowIndex].Cells[3].Value.ToString();
+            if (st == "Подписан")
+            {
+                MessageBox.Show("Протокол уже подписан");
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show(
+        "Подписать протокол?",
+        "Подпись",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Information,
+        MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.Yes)
+                {
+                    this.connection.Open();
+                    SQLiteCommand cmd_3 = new SQLiteCommand("SELECT id FROM protocols WHERE title = @l0", this.connection);
+                    SQLiteParameter param_3 = new SQLiteParameter("@l0", pr);
+                    cmd_3.Parameters.Add(param_3);
+                    SQLiteDataReader DR_3 = cmd_3.ExecuteReader();
+                    while (DR_3.Read())
+                    {
+                        User_info.status_protocol = DR_3.GetInt32(0);
+                    }
+                    DR_3.Close();
+                    SQLiteCommand cmd_2 = new SQLiteCommand("SELECT id FROM users WHERE fio = @l0", this.connection);
+                    SQLiteParameter param_2 = new SQLiteParameter("@l0", f);
+                    cmd_2.Parameters.Add(param_2);
+                    SQLiteDataReader DR_2 = cmd_2.ExecuteReader();
+                    while (DR_2.Read())
+                    {
+                        User_info.status_fio = DR_2.GetInt32(0);
+                    }
+                    DR_2.Close();
+                    SQLiteCommand _command = new SQLiteCommand("UPDATE users_signs SET sign_id=@l2 WHERE user_id = @l0 AND protocol_id = @l1", connection);
+                    _command.Parameters.AddWithValue("@l0", User_info.status_fio);
+                    _command.Parameters.AddWithValue("@l1", User_info.status_protocol);
+                    _command.Parameters.AddWithValue("@l2", 1);
+                    _command.ExecuteNonQuery();
+                    MessageBox.Show("Протокол успешно подписан");
+                    this.connection.Close();
+                }
+                Table_refresh();
+            }
+        }
     }
 }

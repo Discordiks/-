@@ -162,7 +162,7 @@ namespace Проект
             this.Controls.Add(this.exit);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Menu_player";
-            this.Text = "Menu_player";
+            this.Text = "Окно участника";
             this.Load += new System.EventHandler(this.Menu_player_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.player_view)).EndInit();
